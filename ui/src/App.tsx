@@ -8,6 +8,14 @@ import '@agoric/react-components/dist/style.css';
 import { useEffect } from 'react';
 // import { Button, Modal } from 'react-daisyui';
 
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomeComponent from './components/Orchestration/HomeComponent';
+import SignUp from './components/Orchestration/SignUp';
+import LoginPage from './components/Orchestration/LoginPage';
+import MainPage from './components/Orchestration/MainPage';
+import AdminPage from './components/Orchestration/AdminPage';
+
 function App() {
   const { themeClass, setTheme, setColorMode } = useTheme();
   useEffect(() => {
@@ -16,6 +24,16 @@ function App() {
   }, [setTheme, setColorMode]);
 
   return (
+    <>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomeComponent />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+    </Router>
     <ThemeProvider>
       <div className={themeClass}>
         <AgoricProvider
@@ -46,7 +64,7 @@ function App() {
             },
           ]}
           defaultChainName="agoric-local"
-        >
+          >
           <ContractProvider>
             <Navbar />
             <Tabs />
@@ -54,6 +72,8 @@ function App() {
         </AgoricProvider>
       </div>
     </ThemeProvider>
+    
+    </>
   );
 }
 
